@@ -1,7 +1,9 @@
 import React from "react";
 import Chart from "react-apexcharts";
+import {useSelector} from 'react-redux';
 
-const Diagram = (props) => {
+const Diagram = () => {
+  const data = useSelector(state => state)
   const chartData = {
     options: {
         chart: {
@@ -13,7 +15,7 @@ const Diagram = (props) => {
           enabled: false
         },
         xaxis: {
-          categories: props.data.categories,
+          categories: data.categories,
           labels: {
             hideOverlappingLabels: false,
           }
@@ -35,8 +37,8 @@ const Diagram = (props) => {
           <div className="mixed-chart">
             <Chart
               options={chartData.options}
-              series={props.data.series}
-              type={props.data.type}
+              series={data.series}
+              type={data.type}
               height="600px"
             />
           </div>

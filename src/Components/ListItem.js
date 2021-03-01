@@ -11,7 +11,7 @@ const ListItem = (props) => {
             <div className='cards'>
                 <img alt='' src={props.data.photo}/>
                 <Link to={props.data.name}>
-                    <p id={props.data.id} onClick={handleChange}>{props.data.name} {props.data.last_name}</p>
+                    <p id={props.data.id}>{props.data.name} {props.data.last_name}</p>
                 </Link>            
                 <p>{props.data.age}</p>
                 <p>{props.data.phone}</p>

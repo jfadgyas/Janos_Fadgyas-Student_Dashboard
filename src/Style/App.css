@@ -32,12 +32,13 @@ a:hover{
 }
 
 button{
-    background: none;
-    border: 1px solid #17E8F0;
+    background: transparent;
+    border: 1px solid rgb(23, 232, 240);
     border-radius: 5px;
     color: #17E8F0;
     padding: 8px;
     outline: none;
+    box-shadow: 0px 4px 5px rgba(23, 232, 240, 0.2);
 }
 
 button:hover{

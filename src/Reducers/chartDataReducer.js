@@ -1,35 +1,35 @@
-const initial = 
-    {
+import exerciseData from '../data/exerciseData.json';
+import studentData from '../data/studentData.json';
+
+const initial = {
     type: 'bar',
     categories: [],
     series: []
-    }
+}
 
-let xAxis
-let newSeries
-let newState
-let prevData
-
+let prevData    
+    
 const getAverage = (data, which, selectedItems) => {
     const average = data.map(item => (item.reduce((sum, elem) => sum + elem[which],0)/selectedItems.length).toFixed(2))
     return average
 }
-
+    
 const chartDataReducer = (state=initial, action) => {
-    const exerciseData = require('../data/exerciseData.json')
-    const studentData = require('../data/studentData.json')
+    let xAxis
+    let newSeries
+    let newState
     
     switch (action.type){
         case 'FILTER_DATA':
             let filteredData            
             if (action.payload.chartType === 'bar'){
                 xAxis = exerciseData.map(item => item.name)
-                filteredData = exerciseData.map(item => item.results.filter(elem => action.payload.ids.includes(elem.studentId)))                
+                filteredData = exerciseData.map(item => item.results.filter(elem => action.payload.ids.includes(elem.studentId)))
             }
             else {
                 xAxis = studentData.map(item => `${item.name} ${item.last_name}`)
                 const tempData = exerciseData.filter(item => action.payload.ids.includes(item.id))
-                filteredData = tempData[0].results.map(item => tempData.map(elem => {return {leuk: item.leuk, moeilijk: item.moeilijk}}))
+                filteredData = tempData[0].results.map((item, index) => tempData.map(elem => {return {leuk: elem.results[index].leuk, moeilijk: elem.results[index].moeilijk}}))
             }
             newSeries = [
                 {name: 'leuk', data: getAverage(filteredData, 'leuk', action.payload.ids)},

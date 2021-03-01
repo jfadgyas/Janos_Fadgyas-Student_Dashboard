@@ -21,10 +21,6 @@ const List = (props) => {
         else {
             selectedItems.ids = selectedItems.ids.filter(item => item !== name)
         }
-        if (!e.target.type){            
-            selectedItems.ids.push(e.target.id)
-            dispatch(filterData(selectedItems))
-        }
     }
 
     const handleClick = () => {
